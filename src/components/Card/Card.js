@@ -1,14 +1,13 @@
 import React from 'react'
 import './Card.scss'
 
-const Card = () => {
+const Card = props => {
+  const { card } = props
+
   return (
     <li className="card-item">
-      <img
-        src="https://image.shutterstock.com/image-photo/highway-landscape-colorful-sunset-road-260nw-2172624527.jpg"
-        alt="SEO"
-      />
-      title: tharyo test
+      {card.cover && <img className="card-cover" src={card.cover} alt="SEO" />}
+      {card.title}
     </li>
   )
 }
