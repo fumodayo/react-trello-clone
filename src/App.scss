@@ -10,7 +10,6 @@ body {
 
 .trello-thairyo-master {
   height: 100vh; // ăn hết toàn bộ màn hình (không quan tâm đến kích thước)
-  display: grid;
-  grid-template-rows: 40px 50px 1fr; // Lấy theo column - đầu 40px tiếp theo 50px còn lại 1fr
+  overflow: hidden;
   background-color: $board-bg-color;
 }

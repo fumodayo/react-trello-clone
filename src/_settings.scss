@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,400;0,600;1,200&display=swap');
 
-// Variables
+// Height: appbar + boardbar + boardcontent = 99vh, 1vh for scrollbar
+$navbar-app-height: 5vh;
+$navbar-board-height: 6vh;
+$board-content-height: 91vh;
 
 // Screen
 $screen-lg: 1201px;
@@ -10,6 +13,7 @@ $screen-phone: 480px;
 $screen-ip6-down: '(max-width: 375px)';
 
 $gap: 10px;
+
 $column-header-height: 46px;
 $column-footer-height: 46px;
 $column-border-radius: 5px;

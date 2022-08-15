@@ -5,10 +5,18 @@ const Card = props => {
   const { card } = props
 
   return (
-    <li className="card-item">
-      {card.cover && <img className="card-cover" src={card.cover} alt="SEO" />}
+    <div className="card-item">
+      {card.cover && (
+        <img
+          className="card-cover"
+          src={card.cover}
+          alt="SEO"
+          // Chặn mặc định kéo hình ra
+          onMouseDown={e => e.preventDefault()}
+        />
+      )}
       {card.title}
-    </li>
+    </div>
   )
 }
 
