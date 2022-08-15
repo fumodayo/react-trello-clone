@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,400;0,600;1,200&display=swap');
+
+// variables
+$gap: 10px;
+$column-header-height: 36px;
+$column-footer-height: 36px;
+$column-border-radius: 5px;
+$card-border-radius: 5px;
+
+$board-bg-color: #0079bf;
+$appbar-bg-color: #005f95;
+$list-bg-color: #ebecf0;
+$common-element-bg: rgba(255, 255, 255, 0.24);
+
+// Normalize CSS
+body {
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
+}
+
+.trello-thairyo-master {
+  height: 100vh; // ăn hết toàn bộ màn hình (không quan tâm đến kích thước)
+  display: grid;
+  grid-template-rows: 40px 50px 1fr; // Lấy theo column - đầu 40px tiếp theo 50px còn lại 1fr
+  background-color: $board-bg-color;
+
+  .navbar-app {
+    padding-left: $gap;
+    display: flex;
+    align-items: center;
+    background-color: $appbar-bg-color;
+    font-size: 1.5rem;
+  }
+
+  .board-app {
+    padding-left: $gap;
+    display: flex;
+    align-items: center;
+    background-color: $board-bg-color;
+    font-size: 1.1rem;
+  }
+
+  .board-content {
+    display: flex;
+    margin: 0 $gap $gap; //top 0 left right bottom 10px
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    // CSS scrollbar
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:horizontal {
+      // theo chiều ngang
+      height: 11px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $common-element-bg;
+      border-radius: 8px;
+    }
+
+    .column {
+      flex: 0 0 auto;
+      width: 300px;
+      height: calc(100% - #{gap});
+      &:not(:first-child) {
+        margin-left: $gap;
+      }
+      > * {
+        // code chung trong column
+        background-color: $list-bg-color;
+        color: #333;
+        padding: 0 8px;
+      }
+      header {
+        padding-left: 15px;
+        height: $column-header-height;
+        line-height: $column-header-height;
+        font-size: 16px;
+        font-weight: bold;
+        border-top-left-radius: $column-border-radius;
+        border-top-right-radius: $column-border-radius;
+      }
+
+      footer {
+        padding-left: $gap;
+        height: $column-footer-height;
+        line-height: $column-footer-height;
+        border-bottom-left-radius: $column-border-radius;
+        border-bottom-right-radius: $column-border-radius;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        // 100% lấy theo card ngoài - chiều cao header - chiều cao footer = chiều cao ở giữa
+        max-height: calc(
+          100% - #{$column-header-height} - #{$column-footer-height}
+        );
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        // CSS scrollbar
+        &::-webkit-scrollbar {
+          -webkit-appearance: none;
+        }
+        &::-webkit-scrollbar:vertical {
+          // theo chiều dọc
+          width: 11px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: darken($list-bg-color, 15);
+          border-right: 5px solid $list-bg-color;
+        }
+
+        li {
+          background-color: #fff;
+          padding: $gap;
+          border-radius: $card-border-radius;
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+          &:not(:last-child) {
+            margin-bottom: $gap;
+          }
+          img {
+            display: block;
+            width: calc(100% + 2 * #{$gap});
+            margin: -$gap 0 $gap (-$gap);
+            border-top-left-radius: $card-border-radius;
+            border-top-right-radius: $card-border-radius;
+          }
+        }
+      }
+    }
+  }
+}
