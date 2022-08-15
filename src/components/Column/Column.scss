@@ -1,0 +1,57 @@
+@import 'settings.scss';
+
+.column {
+  flex: 0 0 auto;
+  width: 300px;
+  height: calc(100% - #{gap});
+  &:not(:first-child) {
+    margin-left: $gap;
+  }
+  > * {
+    // code chung trong column
+    background-color: $list-bg-color;
+    color: #333;
+    padding: 0 8px;
+  }
+  header {
+    padding-left: 15px;
+    height: $column-header-height;
+    line-height: $column-header-height;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: $column-border-radius;
+    border-top-right-radius: $column-border-radius;
+  }
+
+  footer {
+    padding-left: $gap;
+    height: $column-footer-height;
+    line-height: $column-footer-height;
+    border-bottom-left-radius: $column-border-radius;
+    border-bottom-right-radius: $column-border-radius;
+  }
+
+  ul.card-list {
+    list-style-type: none;
+    margin: 0;
+    // 100% lấy theo card ngoài - chiều cao header - chiều cao footer = chiều cao ở giữa
+    max-height: calc(
+      100% - #{$column-header-height} - #{$column-footer-height}
+    );
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    // CSS scrollbar
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:vertical {
+      // theo chiều dọc
+      width: 11px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: darken($list-bg-color, 15);
+      border-right: 5px solid $list-bg-color;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import '_settings.scss';
+
+.board-app {
+  padding-left: $gap;
+  display: flex;
+  align-items: center;
+  background-color: $board-bg-color;
+  font-size: 1.1rem;
+}
