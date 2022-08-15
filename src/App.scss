@@ -12,4 +12,9 @@ body {
   height: 100vh; // ăn hết toàn bộ màn hình (không quan tâm đến kích thước)
   overflow: hidden;
   background-color: $board-bg-color;
+  color: $app-main-text-color;
+  .icon {
+    font-size: 14px;
+    margin-right: 3px;
+  }
 }

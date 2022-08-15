@@ -5,17 +5,14 @@ import Card from 'components/Card/Card'
 import './Column.scss'
 
 const Column = props => {
-  const { column } = props
+  const { column, onCardDrop } = props
 
   const cards = mapOrder(column.cards, column.cardOrder, 'id')
   /**
-   * kéo card 1 column 1 đến vị trí card 2 column 2
-   *
-   *
+   * item have addedIndex and removedIndex
+   * if col 1 - index 1 move col 2 - index 3
+   * remove col 1 - index 1 && add col 2 - index 3
    */
-  const onCardDrop = dropResult => {
-    console.log(dropResult)
-  }
 
   return (
     <div className="column">
@@ -24,8 +21,9 @@ const Column = props => {
         <Container
           orientation="vertical" // default
           groupName="common-columns" // Chung group để card có thể kéo thả qua các column khác nhau
-          onDrop={onCardDrop}
+          onDrop={dropResult => onCardDrop(column.id, dropResult)}
           getChildPayload={index => cards[index]} // Trả về card vừa kéo thả (payload)
+          // CSS khi kéo card
           dragClass="card-ghost"
           dropClass="card-ghost-drop"
           dropPlaceholder={{
@@ -42,7 +40,12 @@ const Column = props => {
           ))}
         </Container>
       </div>
-      <footer>Add new Item</footer>
+      <footer>
+        <div className="footer-actions">
+          <i className="fa fa-plus icon" />
+          Add another card
+        </div>
+      </footer>
     </div>
   )
 }
