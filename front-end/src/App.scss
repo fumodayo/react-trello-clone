@@ -55,7 +55,19 @@ body {
     cursor: pointer;
     &:focus {
       background-color: #fff;
-      border: 1px solid $input-border-color;
+    }
+  }
+
+  // icon trash
+  span.cancel-icon {
+    margin-left: $gap;
+    cursor: pointer;
+    i {
+      font-size: 18px;
+      color: $alert-danger;
+      &:hover {
+        color: darken($alert-danger, 10);
+      }
     }
   }
 }

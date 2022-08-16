@@ -18,6 +18,8 @@ const BoardContent = () => {
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
+  const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
+
   const [newColumnTitle, setNewColumnTitle] = useState('')
   const onNewColumnTitleChange = e => {
     setNewColumnTitle(e.target.value)
@@ -63,7 +65,7 @@ const BoardContent = () => {
     setBoard(newBoard)
   }
 
-  // Truyển state từ component con -> cha
+  // State column -> board
   const onCardDrop = (columnId, dropResult) => {
     if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
       let newColumns = [...columns]
@@ -75,8 +77,6 @@ const BoardContent = () => {
       setColumns(newColumns)
     }
   }
-
-  const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
   const addNewColumn = () => {
     if (!newColumnTitle) {
@@ -106,7 +106,7 @@ const BoardContent = () => {
     toggleOpenNewColumnForm()
   }
 
-  // State component con -> cha
+  // State column -> board
   const onUpdateColumn = newColumnToUpdate => {
     const columnIdToUpdate = newColumnToUpdate.id
 
@@ -182,10 +182,7 @@ const BoardContent = () => {
               <Button variant="success" size="sm" onClick={addNewColumn}>
                 Add Column
               </Button>
-              <span
-                className="cancel-new-column"
-                onClick={toggleOpenNewColumnForm}
-              >
+              <span className="cancel-icon" onClick={toggleOpenNewColumnForm}>
                 <i className="fa fa-trash icon" />
               </span>
             </Col>
