@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.0",
     "font-awesome": "^4.7.0",
+    "html-react-parser": "^3.0.1",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-bootstrap": "^2.5.0",

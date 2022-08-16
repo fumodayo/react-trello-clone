@@ -43,7 +43,19 @@ body {
   //remove outline button bootstrap
   .btn:focus,
   .btn:active {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .trello-clone-content-editable {
+    background-color: inherit; // kế thừa background của cha
+    border: none;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    &:focus {
+      background-color: #fff;
+      border: 1px solid $input-border-color;
+    }
   }
 }
