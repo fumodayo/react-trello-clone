@@ -1,3 +1,4 @@
+@import '~bootstrap/scss/bootstrap';
 @import '_settings.scss';
 
 // Normalize CSS
@@ -15,6 +16,34 @@ body {
   color: $app-main-text-color;
   .icon {
     font-size: 14px;
-    margin-right: 3px;
+    margin: 0 3px;
+  }
+  .trello-clone-container {
+    margin: 0 15px;
+    padding: 0;
+  }
+
+  // remove outline bootstrap 4
+  textarea:focus,
+  textarea.form-control:focus,
+  input.form-control:focus,
+  input[type='text']:focus,
+  input[type='password']:focus,
+  input[type='email']:focus,
+  input[type='number']:focus,
+  [type='text'].form-control:focus,
+  [type='password'].form-control:focus,
+  [type='email'].form-control:focus,
+  [type='tel'].form-control:focus,
+  [contenteditable].form-control:focus {
+    box-shadow: none;
+    border: 1px solid $input-border-color;
+  }
+
+  //remove outline button bootstrap
+  .btn:focus,
+  .btn:active {
+    outline: none;
+    box-shadow: none;
   }
 }
