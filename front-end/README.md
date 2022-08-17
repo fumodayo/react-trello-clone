@@ -3,7 +3,7 @@
 ## The features of Trello Clone:
 1. Create new a board, list and card.
 2. Overwrite the title of list and card simply and quickly.
-3. Drag and drop tasks between lists
+3. Drag and drop tasks between lists.
 4. Delete a board, list and card.
 5. ...
 
