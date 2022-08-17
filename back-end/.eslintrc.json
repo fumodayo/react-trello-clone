@@ -6,11 +6,10 @@
     "browser": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "eslint:recommended"
   ],
   "plugins": ["react", "react-hooks"],
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
@@ -19,7 +18,7 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "no-console": 1,
+    "no-console": 0,
     "no-unused-vars": 1,
     "no-trailing-spaces": 1,
     "no-multi-spaces": 1,
