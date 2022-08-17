@@ -8,7 +8,7 @@
 5. ...
 
 
-# Work with github
+## Work with github
 ```
 // Tạo <branch_name> và chuyển sang <branch_name>
 $ git checkout -b <branch_name>
