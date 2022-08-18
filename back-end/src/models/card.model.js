@@ -8,7 +8,7 @@ const cardCollectionName = "cards";
 const cardCollectionSchema = Joi.object({
   boardId: Joi.string().required(), // also ObjectId when create new
   columnId: Joi.string().required(), // also ObjectId when create new
-  title: Joi.string().required().min(3).max(20).trim(),
+  title: Joi.string().required().min(3).max(50).trim(),
   cover: Joi.string().default(null),
   createdAt: Joi.date().timestamp().default(Date.now()),
   updatedAt: Joi.date().timestamp().default(null),
@@ -30,7 +30,7 @@ const createNew = async (data) => {
       .insertOne(value);
     return result;
   } catch (error) {
-    console.log(error);
+    throw new Error(error); // error thì trở về service
   }
 };
 

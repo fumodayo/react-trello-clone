@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { getDB } from "*/config/mongodb";
+import { ObjectId } from "mongodb";
 
 // Define Column collection
 const columnCollectionName = "columns";
@@ -29,8 +30,28 @@ const createNew = async (data) => {
       .insertOne(value);
     return result;
   } catch (error) {
-    console.log(error);
+    throw new Error(error); // error thì trở về service
   }
 };
 
-export const ColumnModel = { createNew };
+const update = async (id, data) => {
+  try {
+    const result = await getDB()
+      .collection(columnCollectionName)
+      .findOneAndUpdate(
+        {
+          _id: ObjectId(id), // Tìm phần từ = id truyền vào
+        },
+        { $set: data },
+        {
+          // Trả về bản ghi sau khi update (Không phải bản ghi trước khi update)
+          returnOriginal: false,
+        }
+      );
+    return result.value;
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
+export const ColumnModel = { createNew, update };
