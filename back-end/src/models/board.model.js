@@ -29,7 +29,7 @@ const createNew = async (data) => {
     console.log(result);
     return result;
   } catch (error) {
-    console.log(error);
+    throw new Error(error); // error thì trở về service
   }
 };
 
