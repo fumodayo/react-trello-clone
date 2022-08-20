@@ -55,6 +55,27 @@ const createNew = async (data) => {
   }
 };
 
+/**
+ * @param {string} columnId
+ * @param {string} cardId
+ */
+
+const pushCardOrder = async (columnId, cardId) => {
+  try {
+    const result = await getDB()
+      .collection(columnCollectionName)
+      .findOneAndUpdate(
+        { _id: ObjectId(columnId) },
+        { $push: { cardOrder: cardId } },
+        { returnDocument: "after" } /*return log data after update*/
+      );
+
+    return result.value;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const update = async (id, data) => {
   try {
     const result = await getDB()
@@ -75,4 +96,10 @@ const update = async (id, data) => {
   }
 };
 
-export const ColumnModel = { createNew, update, findOneById };
+export const ColumnModel = {
+  columnCollectionName,
+  createNew,
+  update,
+  findOneById,
+  pushCardOrder,
+};

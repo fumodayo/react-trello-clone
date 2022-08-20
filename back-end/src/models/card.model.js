@@ -57,4 +57,4 @@ const createNew = async (data) => {
   }
 };
 
-export const CardModel = { createNew, findOneById };
+export const CardModel = { cardCollectionName, createNew, findOneById };

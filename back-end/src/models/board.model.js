@@ -1,6 +1,8 @@
 import Joi from "joi";
 import { getDB } from "*/config/mongodb";
 import { ObjectId } from "mongodb";
+import { ColumnModel } from "./column.model";
+import { CardModel } from "./card.model";
 
 // Define Board collection
 const boardCollectionName = "boards";
@@ -40,7 +42,7 @@ const createNew = async (data) => {
     const result = await getDB()
       .collection(boardCollectionName)
       .insertOne(value);
-    console.log(result);
+
     return result;
   } catch (error) {
     throw new Error(error); // error thì trở về service
@@ -89,7 +91,7 @@ const getFullBoard = async (boardId) => {
         // },
         {
           $lookup: {
-            from: "columns", // collection name
+            from: ColumnModel.columnCollectionName, // collection name
             localField: "_id",
             foreignField: "boardId",
             as: "columns", // trả về columns Array tìm được
@@ -97,7 +99,7 @@ const getFullBoard = async (boardId) => {
         },
         {
           $lookup: {
-            from: "cards", // collection name
+            from: CardModel.cardCollectionName, // collection name
             localField: "_id",
             foreignField: "boardId",
             as: "cards", // trả về cards Array tìm được
