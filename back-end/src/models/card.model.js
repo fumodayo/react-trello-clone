@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { getDB } from "*/config/mongodb";
+import { ObjectId } from "mongodb";
 
 // Define Card collection
 const cardCollectionName = "cards";
@@ -22,16 +23,38 @@ const validateSchema = async (data) => {
   });
 };
 
-const createNew = async (data) => {
+const findOneById = async (id) => {
   try {
-    const value = await validateSchema(data);
     const result = await getDB()
       .collection(cardCollectionName)
-      .insertOne(value);
+      .findOne({
+        _id: ObjectId(id),
+      });
     return result;
   } catch (error) {
     throw new Error(error); // error thì trở về service
   }
 };
 
-export const CardModel = { createNew };
+const createNew = async (data) => {
+  try {
+    const validatedValue = await validateSchema(data);
+
+    // Validated boardId string -> ObjectId, columnId string -> ObjectId
+    const insertValue = {
+      ...validatedValue,
+      boardId: ObjectId(validatedValue.boardId),
+      columnId: ObjectId(validatedValue.columnId),
+    };
+
+    const result = await getDB()
+      .collection(cardCollectionName)
+      .insertOne(insertValue);
+
+    return result;
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
+export const CardModel = { createNew, findOneById };

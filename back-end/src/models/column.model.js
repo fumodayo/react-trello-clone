@@ -22,12 +22,33 @@ const validateSchema = async (data) => {
   });
 };
 
-const createNew = async (data) => {
+const findOneById = async (id) => {
   try {
-    const value = await validateSchema(data);
     const result = await getDB()
       .collection(columnCollectionName)
-      .insertOne(value);
+      .findOne({
+        _id: ObjectId(id),
+      });
+    return result;
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
+const createNew = async (data) => {
+  try {
+    const validatedValue = await validateSchema(data);
+
+    // Validated boardId string -> ObjectId
+    const insertValue = {
+      ...validatedValue,
+      boardId: ObjectId(validatedValue.boardId),
+    };
+
+    const result = await getDB()
+      .collection(columnCollectionName)
+      .insertOne(insertValue);
+
     return result;
   } catch (error) {
     throw new Error(error); // error thì trở về service
@@ -45,7 +66,7 @@ const update = async (id, data) => {
         { $set: data },
         {
           // Trả về bản ghi sau khi update (Không phải bản ghi trước khi update)
-          returnOriginal: false,
+          returnDocument: "after",
         }
       );
     return result.value;
@@ -54,4 +75,4 @@ const update = async (id, data) => {
   }
 };
 
-export const ColumnModel = { createNew, update };
+export const ColumnModel = { createNew, update, findOneById };

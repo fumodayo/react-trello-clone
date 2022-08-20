@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { getDB } from "*/config/mongodb";
+import { ObjectId } from "mongodb";
 
 // Define Board collection
 const boardCollectionName = "boards";
@@ -20,6 +21,19 @@ const validateSchema = async (data) => {
   });
 };
 
+const findOneById = async (id) => {
+  try {
+    const result = await getDB()
+      .collection(boardCollectionName)
+      .findOne({
+        _id: ObjectId(id),
+      });
+    return result;
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
 const createNew = async (data) => {
   try {
     const value = await validateSchema(data);
@@ -33,4 +47,74 @@ const createNew = async (data) => {
   }
 };
 
-export const BoardModel = { createNew };
+/**
+ * @param {string} boardId
+ * @param {string} columnId
+ */
+
+const pushColumnOrder = async (boardId, columnId) => {
+  try {
+    const result = await getDB()
+      .collection(boardCollectionName)
+      .findOneAndUpdate(
+        { _id: ObjectId(boardId) },
+        { $push: { columnOrder: columnId } },
+        { returnDocument: "after" } /*return log data after update*/
+      );
+    return result.value;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const getFullBoard = async (boardId) => {
+  try {
+    const result = await getDB()
+      .collection(boardCollectionName)
+      .aggregate([
+        {
+          $match: {
+            _id: ObjectId(boardId), // Tìm id trùng với boardId truyền vào
+          },
+        },
+        // {
+        //   /**
+        //    * Chỉ ghi đè trong quá trình query không ánh hưởng đến database
+        //    * addFields add thêm các field mới nếu filed trùng key với hiện có trong định nghĩa
+        //    * thì chuyển đổi ObjectId -> string sau đó gán vào _id
+        //    */
+        //   $addFields: {
+        //     _id: { $toString: "$_id" },
+        //   },
+        // },
+        {
+          $lookup: {
+            from: "columns", // collection name
+            localField: "_id",
+            foreignField: "boardId",
+            as: "columns", // trả về columns Array tìm được
+          },
+        },
+        {
+          $lookup: {
+            from: "cards", // collection name
+            localField: "_id",
+            foreignField: "boardId",
+            as: "cards", // trả về cards Array tìm được
+          },
+        },
+      ])
+      .toArray();
+
+    return result[0] || {};
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
+export const BoardModel = {
+  createNew,
+  getFullBoard,
+  pushColumnOrder,
+  findOneById,
+};
