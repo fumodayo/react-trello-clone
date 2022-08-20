@@ -57,6 +57,30 @@ const createNew = async (data) => {
   }
 };
 
+const update = async (id, data) => {
+  try {
+    const updateData = { ...data };
+      if (data.boardId) updateData.boardId = ObjectId(data.boardId);
+      if (data.columnId) updateData.columnId = ObjectId(data.columnId);
+
+    const result = await getDB()
+      .collection(cardCollectionName)
+      .findOneAndUpdate(
+        {
+          _id: ObjectId(id), // Tìm phần từ = id truyền vào
+        },
+        { $set: updateData },
+        {
+          // Trả về bản ghi sau khi update (Không phải bản ghi trước khi update)
+          returnDocument: "after",
+        }
+      );
+    return result.value;
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
 /**
  *
  * @param {Array of string card id} ids
@@ -87,4 +111,5 @@ export const CardModel = {
   createNew,
   findOneById,
   deleteMany,
+  update,
 };

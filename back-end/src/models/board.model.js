@@ -115,9 +115,32 @@ const getFullBoard = async (boardId) => {
   }
 };
 
+const update = async (id, data) => {
+  try {
+    const updateData = { ...data };
+
+    const result = await getDB()
+      .collection(boardCollectionName)
+      .findOneAndUpdate(
+        {
+          _id: ObjectId(id), // Tìm phần từ = id truyền vào
+        },
+        { $set: updateData },
+        {
+          // Trả về bản ghi sau khi update (Không phải bản ghi trước khi update)
+          returnDocument: "after",
+        }
+      );
+    return result.value;
+  } catch (error) {
+    throw new Error(error); // error thì trở về service
+  }
+};
+
 export const BoardModel = {
   createNew,
   getFullBoard,
   pushColumnOrder,
+  update,
   findOneById,
 };
