@@ -78,13 +78,18 @@ const pushCardOrder = async (columnId, cardId) => {
 
 const update = async (id, data) => {
   try {
+    const updateData = {
+      ...data,
+      boardId: ObjectId(data.boardId),
+    };
+
     const result = await getDB()
       .collection(columnCollectionName)
       .findOneAndUpdate(
         {
           _id: ObjectId(id), // Tìm phần từ = id truyền vào
         },
-        { $set: data },
+        { $set: updateData },
         {
           // Trả về bản ghi sau khi update (Không phải bản ghi trước khi update)
           returnDocument: "after",

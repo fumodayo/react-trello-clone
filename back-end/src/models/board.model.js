@@ -77,6 +77,7 @@ const getFullBoard = async (boardId) => {
         {
           $match: {
             _id: ObjectId(boardId), // Tìm id trùng với boardId truyền vào
+            _destroy: false,
           },
         },
         // {
