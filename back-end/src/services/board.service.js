@@ -16,9 +16,13 @@ const getFullBoard = async (boardId) => {
   try {
     const board = await BoardModel.getFullBoard(boardId);
 
+    if (!board || !board.columns) {
+      throw new Error("Board not found!");
+    }
+    
     // Add card to each column
     /**
-     * filter tìm những columnId trùng với column.id
+     * filter tìm những columnId trùng với column._id
      * rồi trả về một mảng mới cards trong column
      */
     board.columns.forEach((column) => {
