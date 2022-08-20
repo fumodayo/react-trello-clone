@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { Container, Draggable } from 'react-smooth-dnd'
 import {
   Container as BootstrapContainer,
@@ -88,7 +89,12 @@ const BoardContent = () => {
       currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
       currentColumn.cardOrder = currentColumn.cards.map(i => i._id)
 
-      setColumns(newColumns)
+      /**
+       * Automatic batching for fewer renders in React 18
+       * https://github.com/reactwg/react-18/discussions/21
+       * fix dont batching react-dom v18
+       */
+      flushSync(() => setColumns(newColumns))
 
       if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
         /**
