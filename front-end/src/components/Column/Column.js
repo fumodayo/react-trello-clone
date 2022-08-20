@@ -11,9 +11,10 @@ import {
   selectAllInlineText
 } from 'utilities/contentEditable'
 import { cloneDeep } from 'lodash'
+import { createNewCard, updateColumn } from 'actions/ApiCall'
 
 const Column = props => {
-  const { column, onCardDrop, onUpdateColumn } = props
+  const { column, onCardDrop, onUpdateColumnState } = props
 
   const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
@@ -35,13 +36,20 @@ const Column = props => {
 
   const newCardTextareaRef = useRef(null)
 
-  // Change title column khi blur ra
+  // Change title column khi blur ra (Update Column)
   const handleColumnTitleBlur = () => {
     const newColumn = {
       ...column,
-      title: columnTitle
+      title: columnTitle.trim()
     }
-    onUpdateColumn(newColumn)
+    // Nếu title thay đổi mới request
+    if (columnTitle !== column.title) {
+      // Call API
+      updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        updatedColumn.cards = newColumn.cards
+        onUpdateColumnState(updatedColumn)
+      })
+    }
   }
 
   useEffect(() => {
@@ -64,7 +72,11 @@ const Column = props => {
         ...column,
         _destroy: true
       }
-      onUpdateColumn(newColumn)
+
+      // Call API
+      updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        onUpdateColumnState(updatedColumn)
+      })
     }
     toggleShowConfirmModal()
   }
@@ -76,23 +88,25 @@ const Column = props => {
     }
 
     const newCardToAdd = {
-      // 5 Random characters, will remove when we implement code API
-      id: Math.random().toString(36).substring(2, 5),
-      boarId: column.boarId,
+      boardId: column.boardId,
       columnId: column._id,
-      title: newCardTitle.trim(),
-      cover: null
+      title: newCardTitle.trim()
     }
+    /**
+     * Có được card push vào newColumn update state BoardContent
+     */
+    // Call API
+    createNewCard(newCardToAdd).then(card => {
+      // Giống với let newColumn = { ...column } nhưng newColumn được tạo mới không liên quan đến column cũ
+      let newColumn = cloneDeep(column)
 
-    // Giống với let newColumn = { ...column } nhưng newColumn được tạo mới không liên quan đến column cũ
-    let newColumn = cloneDeep(column)
+      newColumn.cards.push(card)
+      newColumn.cardOrder.push(card._id)
 
-    newColumn.cards.push(newCardToAdd)
-    newColumn.cardOrder.push(newCardToAdd._id)
-
-    onUpdateColumn(newColumn)
-    setNewCardTitle('')
-    toggleOpenNewCardForm()
+      onUpdateColumnState(newColumn)
+      setNewCardTitle('')
+      toggleOpenNewCardForm()
+    })
   }
 
   return (

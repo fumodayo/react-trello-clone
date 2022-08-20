@@ -12,7 +12,7 @@ import Column from 'components/Column/Column'
 import { isEmpty } from 'lodash'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
-import { fetchBoardDetails } from 'actions/ApiCall'
+import { fetchBoardDetails, createNewColumn } from 'actions/ApiCall'
 
 const BoardContent = () => {
   const [board, setBoard] = useState({})
@@ -36,8 +36,8 @@ const BoardContent = () => {
   }, [openNewColumnForm])
 
   useEffect(() => {
-    const boarId = '62fdb768babe9dd20348b0ba'
-    fetchBoardDetails(boarId).then(board => {
+    const boardId = '62fdb768babe9dd20348b0ba'
+    fetchBoardDetails(boardId).then(board => {
       setBoard(board)
       // Sắp xếp column ở bên trong bằng cách sắp xếp mảng columnOrder bằng '_id'
       setColumns(mapOrder(board.columns, board.columnOrder, '_id'))
@@ -84,29 +84,31 @@ const BoardContent = () => {
     }
 
     const newColumnToAdd = {
-      // 5 Random characters, will remove when we implement code API
-      id: Math.random().toString(36).substring(2, 5),
-      boarId: board._id,
-      title: newColumnTitle.trim(),
-      cardOrder: [],
-      cards: []
+      boardId: board._id,
+      title: newColumnTitle.trim()
     }
 
-    let newColumns = [...columns]
-    newColumns.push(newColumnToAdd)
+    /**
+     * Sau khi add new column trong database thì nhận column từ database về để xuất ra
+     * Call API
+     */
+    createNewColumn(newColumnToAdd).then(column => {
+      let newColumns = [...columns]
+      newColumns.push(column)
 
-    let newBoard = { ...board }
-    newBoard.columnOrder = newColumns.map(c => c._id)
-    newBoard.columns = newColumns
+      let newBoard = { ...board }
+      newBoard.columnOrder = newColumns.map(c => c._id)
+      newBoard.columns = newColumns
 
-    setColumns(newColumns)
-    setBoard(newBoard)
-    setNewColumnTitle('')
-    toggleOpenNewColumnForm()
+      setColumns(newColumns)
+      setBoard(newBoard)
+      setNewColumnTitle('')
+      toggleOpenNewColumnForm()
+    })
   }
 
   // State column -> board
-  const onUpdateColumn = newColumnToUpdate => {
+  const onUpdateColumnState = newColumnToUpdate => {
     const columnIdToUpdate = newColumnToUpdate._id
 
     let newColumns = [...columns]
@@ -150,7 +152,7 @@ const BoardContent = () => {
             <Column
               column={column}
               onCardDrop={onCardDrop}
-              onUpdateColumn={onUpdateColumn}
+              onUpdateColumnState={onUpdateColumnState}
             />
           </Draggable>
         ))}
