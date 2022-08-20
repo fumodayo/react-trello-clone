@@ -1,3 +1,6 @@
+
+export const API_ROOT = 'http://localhost:8017'
+
 // TYPE ACTION OF MODAL
 export const MODAL_ACTION_CLOSE = 'MODAL_ACTION_CLOSE'
 export const MODAL_ACTION_CONFIRM = 'MODAL_ACTION_CONFIRM'

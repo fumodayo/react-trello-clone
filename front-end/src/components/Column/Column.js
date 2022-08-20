@@ -15,7 +15,7 @@ import { cloneDeep } from 'lodash'
 const Column = props => {
   const { column, onCardDrop, onUpdateColumn } = props
 
-  const cards = mapOrder(column.cards, column.cardOrder, 'id')
+  const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const toggleShowConfirmModal = () => setShowConfirmModal(!showConfirmModal)
@@ -79,7 +79,7 @@ const Column = props => {
       // 5 Random characters, will remove when we implement code API
       id: Math.random().toString(36).substring(2, 5),
       boarId: column.boarId,
-      columnId: column.id,
+      columnId: column._id,
       title: newCardTitle.trim(),
       cover: null
     }
@@ -88,7 +88,7 @@ const Column = props => {
     let newColumn = cloneDeep(column)
 
     newColumn.cards.push(newCardToAdd)
-    newColumn.cardOrder.push(newCardToAdd.id)
+    newColumn.cardOrder.push(newCardToAdd._id)
 
     onUpdateColumn(newColumn)
     setNewCardTitle('')
@@ -142,7 +142,7 @@ const Column = props => {
         <Container
           orientation="vertical" // default
           groupName="common-columns" // Chung group để card có thể kéo thả qua các column khác nhau
-          onDrop={dropResult => onCardDrop(column.id, dropResult)}
+          onDrop={dropResult => onCardDrop(column._id, dropResult)}
           getChildPayload={index => cards[index]} // Trả về card vừa kéo thả (payload)
           // CSS khi kéo card
           dragClass="card-ghost"
