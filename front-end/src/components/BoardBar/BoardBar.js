@@ -2,36 +2,25 @@ import React from 'react'
 import './BoardBar.scss'
 import { BiStar } from 'react-icons/bi'
 import { FaToriiGate } from 'react-icons/fa'
-import { MdKeyboardArrowDown, MdMoreHoriz, MdPublic } from 'react-icons/md'
-import { RiChatPrivateFill } from 'react-icons/ri'
+import { MdKeyboardArrowDown, MdMoreHoriz } from 'react-icons/md'
 
 const BoardBar = () => {
   return (
     <nav className="board-app">
       <div className="boardbar-left">
-        <button className="navbar-btn">
+        <button className="boardbar-btn">
           <FaToriiGate />
-          <span className="navbar-btn-text">SonThai MERN Stack</span>
+          <span className="boardbar-btn-text">SonThai MERN Stack</span>
           <MdKeyboardArrowDown />
         </button>
         <div className="cut-btn"></div>
-        <button className="navbar-btn">#fullstack-trello-clone</button>
-        <button className="navbar-btn">
+        <button className="boardbar-btn">#fullstack-trello-clone</button>
+        <button className="boardbar-btn">
           <BiStar />
         </button>
         <div className="cut-btn"></div>
-        <button className="navbar-btn">
-          <MdPublic />
-          <span className="navbar-btn-text">Public</span>
-        </button>
-        <button className="navbar-btn">
-          <RiChatPrivateFill />
-          <span className="navbar-btn-text">Private workspace</span>
-        </button>
-        <div className="cut-btn"></div>
-        <button className="navbar-btn">
-          <FaToriiGate />
-          <span className="navbar-btn-text">Automation</span>
+        <button className="boardbar-btn">
+          <span className="boardbar-btn-text">Private workspace</span>
         </button>
         <div className="cut-btn"></div>
         <div className="boardbar-list-image">
@@ -51,14 +40,14 @@ const BoardBar = () => {
             src="https://avatars.githubusercontent.com/thairyo"
             className="circle-image"
           />
-          <img className="circle-image default" />
-          <button className="navbar-btn">Invite</button>
+
         </div>
+        <button className="boardbar-btn">Invite</button>
       </div>
       <div className="boardbar-right">
-        <button className="navbar-btn">
+        <button className="boardbar-btn">
           <MdMoreHoriz />
-          <span className="navbar-btn-text">Show Menu</span>
+          <span className="boardbar-btn-text">Show Menu</span>
         </button>
       </div>
     </nav>

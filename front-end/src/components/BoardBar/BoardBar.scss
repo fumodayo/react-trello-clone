@@ -2,9 +2,44 @@
 
 .board-app {
   height: $navbar-board-height;
-  align-items: center;
   background-color: $board-bg-color;
   padding-left: $gap;
+
+  button.boardbar-btn {
+    color: #fff;
+    outline: none;
+    border: none;
+    background-color: #4a94bf;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 20px;
+    display: inline-block;
+    margin: 3px;
+
+    .boardbar-btn-text {
+      margin-left: $gap;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    &.btn-red {
+      background-color: #f02849;
+    }
+  }
+
+  .circle-image {
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: none;
+      border-style: none;
+    }
+  }
 
   .boardbar-left {
     float: left;
@@ -15,21 +50,19 @@
       opacity: 0.5;
       color: #fff;
       margin: 10px;
+
       &::after {
         content: '|';
       }
     }
 
     .boardbar-list-image {
-      .circle-image {
-        &.default {
-          background-color: #4a94bf;
-        }
-      }
+      
     }
   }
 
   .boardbar-right {
     float: right;
+
   }
 }
