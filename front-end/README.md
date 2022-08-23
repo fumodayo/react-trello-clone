@@ -1,11 +1,9 @@
 # ReactJS - Building an app like Trello.
 
 ## The features of Trello Clone:
-1. Create new a board, list and card.
-2. Overwrite the title of list and card simply and quickly.
-3. Drag and drop tasks between lists.
-4. Delete a board, list and card.
-5. ...
+- Create card with title and description (CRUD).
+- Drag & Drop card between columns.
+- ...
 
 
 ## Work with github

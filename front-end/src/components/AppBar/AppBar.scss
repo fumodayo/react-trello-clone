@@ -2,9 +2,45 @@
 
 .navbar-app {
   height: $navbar-app-height;
-  padding-left: $gap;
-  display: flex;
   align-items: center;
   background-color: $appbar-bg-color;
-  font-size: 1.5rem;
+  color: #fff;
+
+  .navbar-left {
+    float: left;
+    display: flex;
+
+    .navbar-input {
+      background-color: #4a94bf;
+      border-radius: 3px;
+      margin: 3px;
+      position: relative;
+
+      input[type='text'] {
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: inherit;
+        padding: 8px 8px;
+
+        &::placeholder {
+          color: #fff;
+          font-size: 20px;
+        }
+      }
+
+      span.navbar-btn {
+        position: absolute;
+        right: 0;
+        padding: 9px 8px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .navbar-right {
+    float: right;
+    display: flex;
+  }
 }

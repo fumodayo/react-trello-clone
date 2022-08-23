@@ -2,9 +2,34 @@
 
 .board-app {
   height: $navbar-board-height;
-  padding-left: $gap;
-  display: flex;
   align-items: center;
   background-color: $board-bg-color;
-  font-size: 1.1rem;
+  padding-left: $gap;
+
+  .boardbar-left {
+    float: left;
+    display: flex;
+
+    .cut-btn {
+      font-size: 25px;
+      opacity: 0.5;
+      color: #fff;
+      margin: 10px;
+      &::after {
+        content: '|';
+      }
+    }
+
+    .boardbar-list-image {
+      .circle-image {
+        &.default {
+          background-color: #4a94bf;
+        }
+      }
+    }
+  }
+
+  .boardbar-right {
+    float: right;
+  }
 }
