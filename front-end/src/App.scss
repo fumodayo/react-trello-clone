@@ -14,10 +14,12 @@ body {
   overflow: hidden;
   background-color: $board-bg-color;
   color: $app-main-text-color;
+
   .icon {
     font-size: 14px;
     margin: 0 3px;
   }
+
   .trello-clone-container {
     margin: 0 15px;
     padding: 0;
@@ -53,6 +55,7 @@ body {
     font-size: inherit;
     font-weight: inherit;
     cursor: pointer;
+
     &:focus {
       background-color: #fff;
     }
@@ -62,13 +65,50 @@ body {
   span.cancel-icon {
     margin-left: $gap;
     cursor: pointer;
+
     i {
       font-size: 18px;
       color: $alert-danger;
+
       &:hover {
         color: darken($alert-danger, 10);
       }
     }
   }
-  
+
+  // button/image in appbar/ boardbar
+  button.navbar-btn {
+    color: #fff;
+    outline: none;
+    border: none;
+    background-color: #4a94bf;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 20px;
+    display: inline-block;
+    margin: 3px;
+
+    .navbar-btn-text {
+      margin-left: $gap;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    &.btn-red {
+      background-color: #f02849;
+    }
+  }
+
+  .circle-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+    border: none;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
 }
