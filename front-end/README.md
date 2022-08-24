@@ -1,10 +1,12 @@
 # ReactJS - Building an app like Trello.
 
+## Demo:
+![Ảnh ví dụ](https://github.com/thairyo/react-trello-clone/blob/master/front-end/public/trello-clone.gif)
+
 ## The features of Trello Clone:
 - Create card with title and description (CRUD).
 - Drag & Drop card between columns.
 - ...
-
 
 ## Work with github
 ```
