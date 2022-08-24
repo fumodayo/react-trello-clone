@@ -76,39 +76,4 @@ body {
     }
   }
 
-  // button/image in appbar/ boardbar
-  button.navbar-btn {
-    color: #fff;
-    outline: none;
-    border: none;
-    background-color: #4a94bf;
-    padding: 8px;
-    border-radius: 3px;
-    font-size: 20px;
-    display: inline-block;
-    margin: 3px;
-
-    .navbar-btn-text {
-      margin-left: $gap;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    &.btn-red {
-      background-color: #f02849;
-    }
-  }
-
-  .circle-image {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin: 3px;
-    border: none;
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
 }

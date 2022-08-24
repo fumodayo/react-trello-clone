@@ -20,18 +20,18 @@ const BoardBar = () => {
           <BiStar />
         </button>
         <div className="cut-btn"></div>
-        <button className="navbar-btn">
+        <button className="boardbar-btn">
           <MdPublic />
-          <span className="navbar-btn-text">Public</span>
+          <span className="boardbar-btn-text">Public</span>
         </button>
-        <button className="navbar-btn">
+        <button className="boardbar-btn">
           <RiChatPrivateFill />
-          <span className="navbar-btn-text">Private workspace</span>
+          <span className="boardbar-btn-text">Private workspace</span>
         </button>
         <div className="cut-btn"></div>
-        <button className="navbar-btn">
+        <button className="boardbar-btn">
           <FaToriiGate />
-          <span className="navbar-btn-text">Automation</span>
+          <span className="boardbar-btn-text">Automation</span>
         </button>
         <div className="cut-btn"></div>
         <div className="boardbar-list-image">

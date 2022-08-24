@@ -5,6 +5,40 @@
   background-color: $board-bg-color;
   padding-left: $gap;
 
+  button.boardbar-btn {
+    color: #fff;
+    outline: none;
+    border: none;
+    background-color: #4a94bf;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 20px;
+    display: inline-block;
+    margin: 3px;
+
+    .boardbar-btn-text {
+      margin-left: $gap;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    &.btn-red {
+      background-color: #f02849;
+    }
+  }
+
+  .circle-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: none;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
   .boardbar-left {
     float: left;
     display: flex;
@@ -21,16 +55,22 @@
     }
 
     .boardbar-list-image {
-      .circle-image {
-        &.default {
-          background-color: #4a94bf;
-        }
+      display: flex;
+      margin-right: 10px;
+
+      .circle-btn {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: #4a94bf;
+        color: #fff;
+        font-size: 20px;
       }
     }
   }
 
   .boardbar-right {
     float: right;
-
   }
 }
