@@ -20,6 +20,7 @@ import {
   updateColumn,
   updateCard
 } from 'actions/ApiCall'
+import NotFound from 'components/NotFound/NotFound'
 
 const BoardContent = () => {
   const [board, setBoard] = useState({})
@@ -52,7 +53,7 @@ const BoardContent = () => {
   }, [])
 
   if (isEmpty(board)) {
-    return <div>Not Found</div>
+    return <NotFound />
   }
 
   /**
